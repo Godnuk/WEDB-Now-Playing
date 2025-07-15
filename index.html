@@ -610,7 +610,7 @@
       ]
     };
 
-    let songHistory = [];
+    let songHistory = JSON.parse(localStorage.getItem("songHistory")) || [];
 
     function getCurrentDJ() {
       const now = new Date();
@@ -671,18 +671,20 @@ updateHistoryList();
     }
 
     function updateHistoryList() {
-      const listElem = document.getElementById("historyList");
-        if (!listElem) return;
+  const listElem = document.getElementById("historyList");
+  if (!listElem) return;
 
-          listElem.innerHTML = "";
+  listElem.innerHTML = "";
 
-          songHistory.forEach(song => {
+  songHistory.forEach(song => {
     const li = document.createElement("li");
-        li.textContent = song;
-        listElem.appendChild(li);
+    li.textContent = song;
+    listElem.appendChild(li);
   });
-}
 
+  // save the updated list to localStorage
+  localStorage.setItem("songHistory", JSON.stringify(songHistory));
+}
     
     function setTheme(themeClass, panelClass) {
       document.getElementById("clickSound").play();
