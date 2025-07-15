@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WEDB Last 10 Songs</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: #3D007A;
+      color: #fffae3;
+      font-family: 'VT323', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #historyBox {
+      border: 6px solid #00FFFF;
+      border-radius: 16px;
+      padding: 30px;
+      width: 400px;
+      max-width: 90%;
+      background: #2a0033;
+      box-shadow: 0 0 15px #00FFFF, inset 0 0 10px #3D007A;
+    }
+
+    #historyBox h2 {
+      font-size: 3rem;
+      color: #FF00A8;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    #historyList {
+      list-style: none;
+      padding: 0;
+      font-size: 2rem;
+    }
+
+    #historyList li {
+      margin-bottom: 12px;
+      color: #66FF00;
+      border-bottom: 1px solid #66FF00;
+      padding-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div id="historyBox">
+    <h2>Last 10 Songs</h2>
+    <ul id="historyList">
+      <!-- The list items will be inserted here via script -->
+    </ul>
+    <a href="mailto:requests@godnukpress.com?subject=Song%20Request%20for%20WEDB"
+       style="display:block; margin-top:20px; color:#66FF00; text-decoration:underline;">
+      Request a Song!
+    </a>
+  </div>
+
+  <script>
+    const songHistory = [
+      "Floodlight Honey — The Velvet Narrows",
+      "Downshift, My Darling — Heavy Gremlin",
+      "Bone Orchard Graduation — The Sad Trombones",
+      "The Almond Bell — Fierce Algebra",
+      "Motel Clergy — Fierce Algebra",
+      "Drizzle Parade — Couch Knife Atlas",
+      "Boreal Zipline — Tupper & the Glacier",
+      "Thistle Logic — Glowbeam Revival",
+      "Aluminum Hymns — Cork & Litee",
+      "Parade of Lanterns — Dry Valley Darlings"
+    ];
+
+    const listElem = document.getElementById("historyList");
+    songHistory.forEach(song => {
+      const li = document.createElement("li");
+      li.textContent = song;
+      listElem.appendChild(li);
+    });
+  </script>
+</body>
+</html>
