@@ -618,7 +618,13 @@
       ]
     };
 
-    let songHistory = JSON.parse(localStorage.getItem("songHistory")) || [];
+    let songHistory = [];
+
+async function fetchHistoryFromServer() {
+  const res = await fetch("https://wedb-server.onrender.com/api/last10");
+  songHistory = await res.json();
+  updateHistoryList();
+}
 
     function getCurrentDJ() {
       const now = new Date();
@@ -661,6 +667,14 @@
       } else {
         const playlist = playlists[dj] || [];
         const track = playlist[Math.floor(Math.random() * playlist.length)];
+        // Send track to the server
+fetch("https://wedb-server.onrender.com/api/addSong", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(track)
+});
         displayText = `🎵 Now Playing: "${track.title}" — ${track.artist}`;
         const songEntry = `"${track.title}" — ${track.artist}`;
         songHistory.unshift(songEntry);
@@ -709,7 +723,7 @@ updateHistoryList();
       frame.className = "";
       frame.classList.add(panelClass);
     }
-
+fetchHistoryFromServer();
     updateNowPlaying();
   </script>
 </body>
