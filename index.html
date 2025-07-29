@@ -667,16 +667,17 @@ async function fetchHistoryFromServer() {
       } else {
         const playlist = playlists[dj] || [];
         const track = playlist[Math.floor(Math.random() * playlist.length)];
-        // Send track to the server
+const songEntry = `"${track.title}" — ${track.artist}`;
+
 fetch("https://wedb-server.onrender.com/api/addSong", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
   },
-  body: JSON.stringify(track)
+  body: JSON.stringify({ song: songEntry }) // fixed format
 });
+
         displayText = `🎵 Now Playing: "${track.title}" — ${track.artist}`;
-        const songEntry = `"${track.title}" — ${track.artist}`;
         songHistory.unshift(songEntry);
         if (songHistory.length > 10) {
         songHistory.pop();
