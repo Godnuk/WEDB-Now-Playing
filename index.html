@@ -564,15 +564,7 @@
       ]
     };
 
-    let songHistory = [];
-
-async function fetchHistoryFromServer() {
-  const res = await fetch("https://wedb-server.onrender.com/api/last10");
-  songHistory = await res.json();
-  updateHistoryList();
-}
-
-    function getCurrentDJ() {
+ function getCurrentDJ() {
       const now = new Date();
       const hour = now.getHours();
       const minutes = now.getMinutes();
@@ -624,12 +616,7 @@ fetch("https://wedb-server.onrender.com/api/addSong", {
 });
 
         displayText = `🎵 Now Playing: "${track.title}" — ${track.artist}`;
-        songHistory.unshift(songEntry);
-        if (songHistory.length > 10) {
-        songHistory.pop();
-    }
-        
-updateHistoryList();
+       
         updateDelay = getRandomInterval(dj);
       }
 
@@ -638,10 +625,6 @@ updateHistoryList();
 
       setTimeout(updateNowPlaying, updateDelay);
     }
-
-     // save the updated list to localStorage
-  localStorage.setItem("songHistory", JSON.stringify(songHistory));
-}
     
     function setTheme(themeClass, panelClass) {
       document.getElementById("clickSound").play();
@@ -658,8 +641,7 @@ updateHistoryList();
       frame.className = "";
       frame.classList.add(panelClass);
     }
-fetchHistoryFromServer();
-    updateNowPlaying();
+updateNowPlaying();
   </script>
 </body>
 </html>
